@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protect Your Number - Mobile Info Finder Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00ff88;
+            --primary-dark: #00cc6a;
+            --secondary: #0088ff;
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #151b2e;
+            --bg-card: rgba(21, 27, 46, 0.6);
+            --text-primary: #ffffff;
+            --text-secondary: #a0aec0;
+            --border-color: rgba(0, 255, 136, 0.3);
+            --shadow-glow: 0 0 30px rgba(0, 255, 136, 0.2);
+        }
+
+        [data-theme="light"] {
+            --primary: #00cc6a;
+            --primary-dark: #00994f;
+            --secondary: #0066cc;
+            --bg-primary: #f7fafc;
+            --bg-secondary: #ffffff;
+            --bg-card: rgba(255, 255, 255, 0.8);
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --border-color: rgba(0, 204, 106, 0.3);
+            --shadow-glow: 0 0 30px rgba(0, 204, 106, 0.15);
+        }
+
+        [data-theme="neon"] {
+            --primary: #ff00ff;
+            --primary-dark: #cc00cc;
+            --secondary: #00ffff;
+            --bg-primary: #000000;
+            --bg-secondary: #0a0a0a;
+            --bg-card: rgba(10, 10, 10, 0.8);
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --border-color: rgba(255, 0, 255, 0.5);
+            --shadow-glow: 0 0 40px rgba(255, 0, 255, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: all 0.3s ease;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 136, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            backdrop-filter: blur(20px);
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary);
+            color: var(--bg-primary);
+            border-color: var(--primary);
+        }
+
+        .theme-toggle {
+            display: flex;
+            gap: 8px;
+            background: var(--bg-secondary);
+            padding: 6px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .theme-btn {
+            padding: 8px 16px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .theme-btn.active {
+            background: var(--primary);
+            color: var(--bg-primary);
+        }
+
+        main {
+            padding: 60px 0;
+            min-height: calc(100vh - 100px);
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .protection-section {
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeInUp 0.6s ease 0.2s backwards;
+        }
+
+        .protection-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .input-wrapper {
+            margin-bottom: 24px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .protect-input {
+            width: 100%;
+            padding: 18px 24px;
+            font-size: 18px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            color: var(--text-primary);
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .protect-input:focus {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .protect-btn {
+            width: 100%;
+            padding: 18px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--bg-primary);
+        }
+
+        .protect-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .protect-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .info-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 24px;
+        }
+
+        .info-box h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-box li {
+            padding: 8px 0;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .info-box li::before {
+            content: '✓ ';
+            color: var(--primary);
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 16px 24px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success {
+            border-color: var(--primary);
+        }
+
+        .toast.error {
+            border-color: #ff4444;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            .protection-card {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">🛡️ Protect Your Number</div>
+                <div class="nav-links">
+                    <a href="index.html" class="nav-btn">🔍 Search Numbers</a>
+                </div>
+                <div class="theme-toggle">
+                    <button class="theme-btn active" data-theme="dark">🌙 Dark</button>
+                    <button class="theme-btn" data-theme="light">☀️ Light</button>
+                    <button class="theme-btn" data-theme="neon">⚡ Neon</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="hero">
+                <h1>Protect Your Privacy</h1>
+                <p>Enter your number below to protect it from being looked up in our system</p>
+            </div>
+
+            <div class="protection-section">
+                <div class="protection-card">
+                    <div class="input-wrapper">
+                        <label class="input-label" for="numberInput">Your Mobile Number</label>
+                        <input type="tel" class="protect-input" id="numberInput" placeholder="Enter 10-digit number..." maxlength="10" pattern="\d*" inputmode="numeric">
+                    </div>
+
+                    <button class="protect-btn" id="protectBtn">🛡️ Protect This Number</button>
+
+                    <div class="info-box">
+                        <h3>🔒 What happens when you protect your number?</h3>
+                        <ul>
+                            <li>Your number is added to our protection database</li>
+                            <li>Anyone searching your number will see "This number is Protected"</li>
+                            <li>Your personal information won't be displayed</li>
+                            <li>Protection is permanent and cannot be reversed</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+
+        const themeButtons = document.querySelectorAll('.theme-btn');
+        themeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const theme = btn.dataset.theme;
+                document.body.setAttribute('data-theme', theme);
+                themeButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                localStorage.setItem('theme', theme);
+            });
+        });
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.body.setAttribute('data-theme', savedTheme);
+        document.querySelector(`[data-theme="${savedTheme}"]`).classList.add('active');
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const icon = type === 'success' ? '✅' : '❌';
+            toast.textContent = icon + ' ' + message;
+            toast.className = 'toast show ' + type;
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        document.getElementById('numberInput').addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+
+        document.getElementById('protectBtn').addEventListener('click', async () => {
+            const numberInput = document.getElementById('numberInput');
+            const protectBtn = document.getElementById('protectBtn');
+            const number = numberInput.value.trim();
+
+            if (!/^\d{10}$/.test(number)) {
+                showToast('Please enter a valid 10-digit number', 'error');
+                return;
+            }
+
+            protectBtn.disabled = true;
+            protectBtn.textContent = '⏳ Protecting...';
+
+            try {
+                const response = await fetch('/api/protect', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ number: number })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    if (data.alreadyProtected) {
+                        showToast('This number is already protected!', 'success');
+                    } else {
+                        showToast('💥 Number successfully protected!', 'success');
+                        numberInput.value = '';
+                    }
+                } else {
+                    showToast(data.error || 'Failed to protect number. Please try again.', 'error');
+                }
+            } catch (error) {
+                console.error('Protection error:', error);
+                showToast('Failed to protect number. Please try again.', 'error');
+            } finally {
+                protectBtn.disabled = false;
+                protectBtn.textContent = '🛡️ Protect This Number';
+            }
+        });
+
+        document.getElementById('numberInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                document.getElementById('protectBtn').click();
+            }
+        });
+    </script>
+</body>
+</html>
