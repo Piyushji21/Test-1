@@ -28,6 +28,14 @@ This direct upload flow needs PHP hosting (like InfinityFree). Pure static hosti
 - Chapter pages now include a mobile-friendly settings panel with **Term / Text / Reader** tabs.
 - Reader tab supports custom background + text colors, font family, font size, and line-height controls.
 - Reader display preferences are saved in browser local storage and reused when opening chapter pages again.
+
+- Added advanced chapter reader controls inspired by WTR-LAB: display options, text/term tabs, and term editor sections.
+- Excluded translation mode switcher, AI translation gate, and Google translate fallback links as requested.
+
+
+## Novella copy
+
+A full copy of the website is also available in `novella/` with the same files and features.
 ## Static Novel Website
 
 A complete static novel reading website is available in `novel-static-site/`.
