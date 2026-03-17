@@ -8,6 +8,7 @@
   </head>
   <body>
     <header class="topbar admin-topbar">
+    <header class="topbar">
       <div class="brand-wrap">
         <span class="brand-icon">📖</span>
         <span class="brand-title">My Novel</span>
@@ -41,6 +42,53 @@
 
           <p id="formMessage" class="subtle admin-message"></p>
         </form>
+      <div class="header-actions">
+        <button id="exportBtn" class="pill-btn" type="button">Export</button>
+        <label class="pill-btn file-label" for="importInput">Import</label>
+        <input id="importInput" type="file" accept="application/json" hidden />
+      </div>
+    </header>
+
+    <main class="page">
+      <section id="lockCard" class="card admin-lock">
+        <h1>Admin Access</h1>
+        <input id="passwordInput" type="password" placeholder="Enter password" />
+        <button id="unlockBtn" class="btn-primary" type="button">Unlock</button>
+        <p id="lockMessage" class="subtle"></p>
+      </section>
+
+      <section id="adminPanel" class="card hidden">
+        <h2>＋ Add New Chapter</h2>
+
+        <input id="chapterNumber" type="number" min="1" placeholder="Chapter Number" />
+        <input id="chapterTitle" type="text" placeholder="Chapter Title" />
+        <input id="chapterSlug" type="text" placeholder="File slug (example: chapter-1)" />
+
+        <label for="chapterFile" class="upload-btn">⤴ Upload .txt or .html file</label>
+        <input id="chapterFile" type="file" accept=".html,.htm,.txt" hidden />
+
+        <textarea
+          id="chapterText"
+          rows="12"
+          placeholder="Or paste chapter content here (supports HTML)..."
+        ></textarea>
+
+        <div class="action-row">
+          <button id="generateBtn" class="btn-primary" type="button">Generate Chapter</button>
+          <button id="downloadBtn" class="btn-outline" type="button" disabled>
+            Download .html
+          </button>
+        </div>
+
+        <p class="subtle">
+          Generated chapter pages should be placed in <code>novel-static-site/chapters/</code> for
+          deployment.
+        </p>
+      </section>
+
+      <section id="previewCard" class="card hidden">
+        <h2>Generated HTML Preview</h2>
+        <pre id="htmlPreview" class="preview"></pre>
       </section>
     </main>
 
