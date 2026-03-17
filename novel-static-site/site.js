@@ -1,6 +1,7 @@
 const STORAGE_KEY = 'myNovelChapters';
 
 function getLocalChapters() {
+function getChapters() {
   try {
     return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
   } catch {
@@ -27,6 +28,10 @@ async function getChapters() {
 function renderChapters(chapters) {
   const list = document.getElementById('chapterList');
   const count = document.getElementById('chapterCount');
+function renderChapters() {
+  const list = document.getElementById('chapterList');
+  const count = document.getElementById('chapterCount');
+  const chapters = getChapters();
 
   count.textContent = `${chapters.length} chapter${chapters.length === 1 ? '' : 's'} available`;
 
@@ -47,3 +52,4 @@ function renderChapters(chapters) {
   const chapters = await getChapters();
   renderChapters(chapters);
 })();
+ renderChapters();
