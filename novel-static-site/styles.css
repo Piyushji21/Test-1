@@ -299,9 +299,33 @@ textarea {
   gap: 10px;
 }
 
+.chapter-read {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.chapter-read h1 {
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  margin: 0 0 0.7rem;
+  line-height: 1.2;
+}
+
 .chapter-read p {
   color: var(--muted);
-  line-height: 1.7;
+  line-height: 1.9;
+  margin: 0 0 1.1rem;
+  font-size: 1.05rem;
+}
+
+.chapter-read p:first-of-type {
+  font-size: 1.15rem;
+  color: #f2d7b7;
+}
+
+@media (min-width: 768px) {
+  .chapter-read p {
+    font-size: 1.1rem;
+  }
 }
 
 .admin-page {
@@ -403,9 +427,4 @@ textarea {
 
 .hidden {
   display: none;
-}
-
-.chapter-read p {
-  color: var(--muted);
-  line-height: 1.7;
 }
