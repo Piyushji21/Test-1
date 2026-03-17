@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel - My Novel</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar admin-topbar">
+      <div class="brand-wrap">
+        <span class="brand-icon">📖</span>
+        <span class="brand-title">My Novel</span>
+      </div>
+      <a class="icon-btn" href="index.html" aria-label="Back to home">⌂</a>
+    </header>
+
+    <main class="page admin-page">
+      <section class="card admin-card">
+        <h1 class="admin-heading">＋ Add New Chapter</h1>
+
+        <form id="chapterForm" class="admin-form" action="upload.php" method="post" enctype="multipart/form-data">
+          <input id="adminPassword" name="adminPassword" type="password" placeholder="Admin Password" required />
+          <input id="chapterNumber" name="chapterNumber" type="number" min="1" placeholder="Chapter Number" required />
+          <input id="chapterTitle" name="chapterTitle" type="text" placeholder="Chapter Title" required />
+          <input id="chapterSlug" name="chapterSlug" type="text" placeholder="Chapter Slug (optional)" />
+
+          <label for="chapterFile" class="upload-btn">⤴ Upload .txt or .html file</label>
+          <input id="chapterFile" name="chapterFile" type="file" accept=".html,.htm,.txt" />
+
+          <textarea
+            id="chapterText"
+            name="chapterText"
+            rows="12"
+            placeholder="Or paste chapter content here (supports HTML)..."
+          ></textarea>
+
+          <div class="action-row admin-submit-row">
+            <button id="submitChapterBtn" class="btn-primary submit-btn" type="submit">Submit Chapter</button>
+          </div>
+
+          <p id="formMessage" class="subtle admin-message"></p>
+        </form>
+      </section>
+    </main>
+
+    <script src="admin.js"></script>
+  </body>
+</html>
