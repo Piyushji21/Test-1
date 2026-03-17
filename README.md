@@ -22,6 +22,12 @@ Website files are in `novel-static-site/`.
 ## Hosting note
 
 This direct upload flow needs PHP hosting (like InfinityFree). Pure static hosting will not execute `upload.php`.
+
+## Reader customization features
+
+- Chapter pages now include a mobile-friendly settings panel with **Term / Text / Reader** tabs.
+- Reader tab supports custom background + text colors, font family, font size, and line-height controls.
+- Reader display preferences are saved in browser local storage and reused when opening chapter pages again.
 ## Static Novel Website
 
 A complete static novel reading website is available in `novel-static-site/`.

@@ -12,6 +12,101 @@
         <span class="brand-icon">📖</span>
         <span class="brand-title">My Novel</span>
       </div>
+      <div class="reader-actions">
+        <button id="readerSettingsToggle" class="icon-btn" type="button" aria-label="Reader settings">⚙</button>
+        <a class="icon-btn" href="../index.html" aria-label="Back to home">⌂</a>
+      </div>
+    </header>
+
+    <section id="readerSettings" class="reader-settings hidden">
+      <div class="settings-tabs">
+        <button type="button" class="settings-tab" data-tab="term">Term</button>
+        <button type="button" class="settings-tab" data-tab="text">Text</button>
+        <button type="button" class="settings-tab active" data-tab="reader">Reader</button>
+      </div>
+
+      <div class="settings-panel" data-panel="term">
+        <h3>Terms Style</h3>
+        <div class="segmented">
+          <button class="segment active" type="button">Bold On</button>
+          <button class="segment" type="button">Underline Off</button>
+          <button class="segment" type="button">Italic Off</button>
+        </div>
+        <h3>System Terms</h3>
+        <div class="segmented">
+          <button class="segment active" type="button">Default</button>
+          <button class="segment" type="button">Colored</button>
+        </div>
+        <h3>Preview</h3>
+        <div class="settings-preview">“This is the <span class="term-blue">Otsutsuki Clan</span> and <span class="term-green">Chakra</span>.”</div>
+      </div>
+
+      <div class="settings-panel" data-panel="text">
+        <h3>Brackets Style</h3>
+        <div class="segmented">
+          <button class="segment active" type="button">【Corner】</button>
+          <button class="segment" type="button">[Regular]</button>
+          <button class="segment" type="button">『Semi-Corner』</button>
+        </div>
+
+        <label class="switch-row">
+          <input id="autoPunc" type="checkbox" checked />
+          <span>Auto Fix English Punctuation</span>
+        </label>
+
+        <label for="fontSelect">Custom Font</label>
+        <select id="fontSelect" class="reader-select">
+          <option value="Segoe UI">Nunito Sans</option>
+          <option value="Roboto, sans-serif">Roboto</option>
+          <option value="Georgia, serif">Lora</option>
+        </select>
+      </div>
+
+      <div class="settings-panel active" data-panel="reader">
+        <h3>Custom Theme Creator</h3>
+        <label class="switch-row">
+          <input id="enableTheme" type="checkbox" />
+          <span>Enable Custom Theme</span>
+        </label>
+
+        <label for="bgColorInput">Background Color</label>
+        <div class="color-row">
+          <input id="bgColorPicker" type="color" value="#171311" />
+          <input id="bgColorInput" type="text" value="#171311" />
+        </div>
+
+        <label for="textColorInput">Text Color</label>
+        <div class="color-row">
+          <input id="textColorPicker" type="color" value="#f5ede4" />
+          <input id="textColorInput" type="text" value="#f5ede4" />
+        </div>
+
+        <label>Font Size</label>
+        <div class="segmented font-size-control">
+          <button id="fontDown" class="segment" type="button">A-</button>
+          <span id="fontSizeLabel" class="segment active">18</span>
+          <button id="fontUp" class="segment" type="button">A+</button>
+        </div>
+
+        <label>Line Height</label>
+        <div class="segmented line-height-control">
+          <button id="lineDown" class="segment" type="button">Height -</button>
+          <span id="lineHeightLabel" class="segment active">1.7</span>
+          <button id="lineUp" class="segment" type="button">Height +</button>
+        </div>
+
+        <h3>Preview</h3>
+        <div id="readerPreview" class="settings-preview">
+          "Welcome to <span class="term-green">wtr-lab</span>," she said. It's a journey worth taking!
+        </div>
+      </div>
+
+      <div class="settings-footer">
+        <button id="resetReaderSettings" type="button" class="btn-secondary">Cancel</button>
+        <button id="saveReaderSettings" type="button" class="btn-primary">Save Changes</button>
+      </div>
+    </section>
+
       <a class="icon-btn" href="../index.html">⌂</a>
     </header>
 
@@ -26,5 +121,7 @@
       </article>
       <a class="btn-outline" href="../index.html">← Back to all chapters</a>
     </main>
+
+    <script src="../reader-settings.js"></script>
   </body>
 </html>

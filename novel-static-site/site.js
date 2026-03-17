@@ -52,4 +52,4 @@ function renderChapters() {
   const chapters = await getChapters();
   renderChapters(chapters);
 })();
-renderChapters();
+ renderChapters();
