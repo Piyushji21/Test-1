@@ -156,6 +156,9 @@ function build_html($title, $bodyContent) {
       </div>
     </section>
 
+      <a class=\"icon-btn\" href=\"../index.html\">⌂</a>
+    </header>
+
     <main class=\"page\">
       <article class=\"card chapter-read\">
         <h1>{$safeTitle}</h1>
